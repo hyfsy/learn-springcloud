@@ -1,0 +1,96 @@
+server:
+  port: 8305
+spring:
+  application:
+    name: eureka-server
+  cloud:
+    bootstrap:
+      enabled: true
+      name: abc
+      sources:
+  config:
+    use-legacy-processing: false
+    allow-override: false # 是否允许BootstrapConfiguration获取的所有属性覆盖原本环境的属性
+    override-none: false # allow-override为true的情况下，是否什么都不覆盖的添加到环境中，优先
+    override-system-properties: true # allow-override为true的情况下，是否覆盖系统属性，之后
+  profiles:
+    active:
+      - dev
+      - test
+    include: a,b,c
+bootstrap: abc
+eureka:
+  dashboard:
+    enabled: true
+    path: /
+  instance:
+    hostname: localhost
+    registry:
+      expected-number-of-clients-sending-renews: 1 # Deprecated
+      default-open-for-traffic-count: 1 # upper use this
+    data-center-info:
+      name: MyOwn # cloud的默认数据中心，非AWS
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+#      defaultZone: http://localhost:8305/eureka/
+      defaultZone: http://localhost8306:8306/eureka/ # 开启集群
+    eureka-connection-idle-timeout-seconds: 30 # 心跳
+    eureka-server-connect-timeout-seconds: 5
+    eureka-server-read-timeout-seconds: 8
+    eureka-server-total-connections: 200
+    use-dns-for-fetching-service-urls: false # 刷新参数配置 @see EnvironmentChangeEvent
+    availability-zones:
+      defaultZone: http://localhost8306:8306/eureka/
+    region: cn-east-8 # AWS使用
+#    transport: xxx # clientConfig的内部配置
+  server:
+    enable-self-preservation: true # 是否启用自我保护
+    renewal-percent-threshold: 0.85 # 指定时间内更新的百分比
+    renewal-threshold-update-interval-ms: 900000 # 指定周期内，如0s内超过25%的更新
+    expected-client-renewal-interval-seconds: 30 # 客户端检测的心跳时间
+    peer-eureka-nodes-update-interval-ms: 600000 # 对等节点更新的时间间隔
+    enable-replicated-request-compression: false # 复制时请求是否压缩
+    number-of-replication-retries: 5 # 复制失败的重试次数
+    peer-eureka-status-refresh-time-interval-ms: 0 # 对等节点的状态刷新周期
+    wait-time-in-ms-when-sync-empty: 0 # 服务启动时无法从对等节点获取实例的等待时间
+    peer-node-connect-timeout-ms: 200 # 连接超时
+    peer-node-read-timeout-ms: 200 # 读取信息超时
+    peer-node-total-connections: 1000 # 所有节点进行复制发送的最大HTTP连接数
+    peer-node-total-connections-per-host: 500 # 每个节点允许发送的最大HTTP连接数
+    peer-node-connection-idle-timeout-seconds: 30 # HTTP连接空闲超时时间
+    disable-delta: false # 禁用增量信息（实例的添加等等）
+    retention-time-in-m-s-in-delta-queue: 180000 # 增量信息队列的容量
+    delta-retention-timer-interval-in-ms: 30000 # 增量信息清理的周期
+    eviction-interval-timer-in-ms: 60000 # 实例过期的周期
+    use-read-only-response-cache: true # 响应为只读缓存，缓存不会过期，读写缓存会过期
+    initial-capacity-of-response-cache: 1000 # 响应缓存数量
+    response-cache-update-interval-ms: 1000 # 响应缓存的更新周期
+    response-cache-auto-expiration-in-seconds: 180 # 响应缓存的过期时间
+    max-idle-thread-in-minutes-age-for-status-replication: 10 # 复制状态的线程空闲超时时间
+    max-threads-for-status-replication: 1 # 状态复制线程池中的最大线程数
+    min-threads-for-status-replication: 1 # 状态复制线程池中的最小线程数
+    max-elements-in-status-replication-pool: 10000 # 池中复制事件对象的总数
+    max-idle-thread-age-in-minutes-for-peer-replication: 15 # 复制线程的空闲超时时间
+    max-threads-for-peer-replication: 20 # 复制池的最大线程数
+    min-threads-for-peer-replication: 5 # 复制池的最小线程数
+    max-elements-in-peer-replication-pool: 10000 # 池中事件对象的总数，池中的事件没有复制状态事件
+    sync-when-timestamp-differs: true # 实例之间的时间戳不同时是否同步该实例
+    registry-sync-retries: 5 # 注册对等节点的重试次数，不自我注册则为0
+    registry-sync-retry-wait-ms: 0 # 注册失败的重试等待时间
+    min-available-instances-for-peer-replication: -1 # 集群可用的最小活跃节点数量，-1禁用
+    max-time-for-replication: 30000 # 复制的时间
+    # remote region ...
+    batch-replication: false # 复制批处理
+    my-url: http://localhost8305:8305/eureka
+    log-identity-headers: true # 记录请求头
+    rate-limiter-enabled: false # 客户端限流
+    rate-limiter-throttle-standard-clients: false # 仅限流非标准客户端
+    rate-limiter-privileged-clients: # 标准客户端白名单，不限流
+      - http://localhost8305:8305/
+      - http://localhost8306:8306/
+    rate-limiter-burst-size: 10 # 令牌桶数量
+    rate-limiter-full-fetch-average-rate: 100 # 完全刷新的窗口数量
+    rate-limiter-registry-fetch-average-rate: 500 # 刷新的平均窗口时间
+    disable-transparent-fallback-to-other-region: false # 查找本地节点找不到时，是否包含远程节点

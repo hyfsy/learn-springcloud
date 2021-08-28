@@ -1,0 +1,72 @@
+server:
+  port: 8314
+spring:
+  application:
+    name: eureka-service-consumer-openfeign
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8305/eureka/
+feign:
+  client:
+    inherit-parent-context: # 启用配置文件的覆盖
+    default-to-properties: true # Feign配置以属性配置文件中的为主
+    default-config: default # 默认的Feign配置
+    decode-slash: true # 解码 /
+    config: # 这边的配置对象会从容器中获取
+      default:
+        logger-level: FULL
+        connect-timeout: 2000
+        read-timeout: 2000
+        decode404: false
+#        errorDecoder: com.example.SimpleErrorDecoder
+#        retryer: com.example.SimpleRetryer
+#        defaultQueryParameters:
+#          query: queryValue
+#        defaultRequestHeaders:
+#          header: headerValue
+#        requestInterceptors:
+#          - com.example.FooRequestInterceptor
+#          - com.example.BarRequestInterceptor
+#        encoder: com.example.SimpleEncoder
+#        decoder: com.example.SimpleDecoder
+#        contract: com.example.SimpleContract
+#        capabilities:
+#          - com.example.FooCapability
+#          - com.example.BarCapability
+#        metrics.enabled: false
+  compression: # ok-http 不支持压缩
+    request:
+      enabled: false # 默认不启用压缩
+      min-request-size: 2048 # 请求最小阈值内容大小
+      mime-types: text/xml, application/xml, application/json # 请求支持的mime类型
+    response:
+      enabled: true # 默认不启用压缩
+      useGzipDecoder: false # Gzip解压缩响应
+  httpclient:
+    enabled: true
+    disable-ssl-validation: false # 禁用ssl校验
+    max-connections: 200 # 客户端最大连接数
+    max-connections-per-route: 50 # 每条路由的最大连接数
+    time-to-live: 900 # ttl时间
+    time-to-live-unit: seconds # ttl单位
+    follow-redirects: true # 响应返回302自动重定向
+    connection-timeout: 2000 # 连接超时时间
+    connection-timer-repeat: 3000 # 连接计时器重复的次数
+    hc5: # apache额外配置
+      enabled: false
+      socket-timeout: 5 # socket超时时间
+      socket-timeout-unit: seconds # socket超时时间单位
+      pool-concurrency-policy: STRICT # 强制并发连接数，不弹性（lax）
+      pool-reuse-policy: FIFO # 先进先出
+  hystrix:
+    enabled: false
+  circuitbreaker:
+    enabled: false
+  okhttp:
+    enabled: false # 启用ok-http客户端
+  encoder:
+    charset-from-context-type: true # 指示编码字符集是否通过 Content-Type选择
+  autoconfiguration:
+    jackson:
+      enabled: false # feign的jackson配置，可对 Page和 Sort对象解码。see FeignAutoConfiguration$FeignJacksonConfiguration

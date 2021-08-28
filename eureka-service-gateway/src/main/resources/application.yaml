@@ -1,0 +1,40 @@
+server:
+  port: 8317
+spring:
+  application:
+    name: eureka-service-gateway
+  cloud:
+    discovery:
+      reactive:
+        enabled: true
+    gateway:
+      routes:
+#        - id: eureka-service-provider/provider # 路由ID，要求唯一，建议配合服务名
+##          uri: http://localhost:8310 # 提供服务的路由地址
+#          uri: lb:http://eureka-service-provider # 提供服务的路由地址
+#          predicates: # 支持多种断言
+#            - Path=/provider/**
+#          filters:
+#            - AddRequestHeader=X-Request-red, RED # 前提是predicate中添加了segment
+        - id: favicon
+          uri: http://localhost:${server.port}/favicon.ico
+          predicates:
+            - Path=/favicon.ico
+        - id: baidu/news
+          uri: http://news.baidu.com/
+          predicates:
+            - Path=/**
+            - Age=10,20
+      discovery:
+        locator:
+          enabled: true # http://localhost:8317/EUREKA-SERVICE-PROVIDER/provider
+    nacos:
+      discovery:
+        server-addr: http://127.0.0.1:8853
+eureka:
+  instance:
+    hostname: ${spring.application.name}
+  # 网关也需要注册进注册中心
+  client:
+    service-url:
+      defaultZone: http://localhost:8305/eureka/

@@ -1,0 +1,42 @@
+server:
+  port: 8313
+spring:
+  application:
+    name: eureka-service-consumer-ribbon
+  cloud:
+    loadbalancer:
+      ribbon:
+        enabled: true
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8305/eureka/
+ribbon:
+  ReadTimeout: 5000 # 建立连接所用的时间
+  ConnectTimeout: 5000 # 建立连接后从服务器上读取到数据的时间
+  client:
+    name: xxxxx
+  # 客户端急切初始化，而非第一次请求时
+  eager-load:
+    enabled: false
+    clients:
+      - aaa
+      - bbb
+      - ccc
+  eureka:
+    enabled: true
+    approximateZoneFromHostname: false
+  http:
+    client:
+      enabled: false # remove in Edgware(zuul)
+  restclient:
+    enabled: false
+  okhttp:
+    enabled: false
+  secure-ports:
+    - 443
+    - 8443
+# 指定某个服务使用的客户端组件
+users:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.WeightedResponseTimeRule

@@ -1,0 +1,15 @@
+server:
+  port: 8306
+spring:
+  application:
+    name: eureka-server
+eureka:
+  instance:
+    hostname: localhost
+    perferIpAddress: false # 名称用ip展示
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      # ,分隔
+      defaultZone: http://localhost8305:8305/eureka/

@@ -1,0 +1,21 @@
+server:
+  port: 8316
+spring:
+  application:
+    name: eureka-service-consumer-hystrix
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8305/eureka/
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - health
+          - info
+          - hystrix.stream
+turbine:
+  app-config: eureka-service-consumer-hystrix # 需要收集的微服务名称
+  cluster-name-expression: new String('default') # 集群名称，必须为SpEL表达式，不输入默认default
+  combine-host-port: true # 同一主机上的服务通过主机名和端口号的组合来进行区分，默认以host来区分

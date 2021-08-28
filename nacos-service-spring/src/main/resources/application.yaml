@@ -1,0 +1,6 @@
+server:
+  port: 8325
+
+spring:
+  application:
+    name: nacos-service-spring

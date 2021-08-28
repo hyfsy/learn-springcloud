@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.hyf</groupId>
+    <artifactId>learn-springcloud</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <!-- 默认jar -->
+    <packaging>pom</packaging>
+
+    <modules>
+        <!-- netflix -->
+        <!--<module>eureka-server01</module>-->
+        <!--<module>eureka-server02</module>-->
+        <!--<module>eureka-server03</module>-->
+        <!--<module>eureka-service-provider01</module>-->
+        <!--<module>eureka-service-provider02</module>-->
+        <!--<module>eureka-service-provider03</module>-->
+        <!--<module>eureka-service-consumer</module>-->
+        <!--<module>eureka-service-consumer-ribbon</module>-->
+        <!--<module>eureka-service-consumer-openfeign</module>-->
+        <!--<module>eureka-service-consumer-hystrix</module>-->
+        <!--<module>eureka-service-consumer-hystrix-turbine</module>-->
+        <!--<module>eureka-service-gateway</module>-->
+        <!--<module>eureka-service-cluster</module>-->
+
+        <!-- alibaba -->
+        <!--<module>nacos-service-consumer</module>-->
+        <!--<module>nacos-service-provider01</module>-->
+        <!--<module>nacos-service-provider02</module>-->
+        <!--<module>nacos-service-config</module>-->
+        <!--<module>nacos-service-basic</module>-->
+        <!--<module>nacos-service-spring</module>-->
+        <!--<module>nacos-service-spring-boot</module>-->
+        <!--<module>nacos-service-consumer-seata</module>-->
+        <!--<module>nacos-service-provider-seata-store</module>-->
+        <!--<module>nacos-service-provider-seata-order</module>-->
+        <!--<module>nacos-service-provider-seata-money</module>-->
+
+        <!-- test -->
+        <!--<module>test-devtools</module>-->
+        <!--<module>learn-springcloud-dependencies</module>-->
+    </modules>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+
+        <!-- TODO Spring注解扫描穿透整个项目工程？ -->
+        <spring.cloud-version>2020.0.3</spring.cloud-version>
+        <spring.boot-version>2.5.1</spring.boot-version>
+        <spring.cloud-alibaba-version>2021.1</spring.cloud-alibaba-version>
+
+        <!--<spring.cloud-version>Hoxton.SR4</spring.cloud-version>-->
+        <!--<spring.boot-version>2.2.5.RELEASE</spring.boot-version>-->
+        <!--<spring.cloud-alibaba-version>2.2.3.RELEASE</spring.cloud-alibaba-version>-->
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring.boot-version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring.cloud-version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring.cloud-alibaba-version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring.boot-version}</version>
+                    <executions>
+                        <execution>
+                            <id>repackage</id>
+                            <goals>
+                                <goal>repackage</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <mainClass>${start-class}</mainClass>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>

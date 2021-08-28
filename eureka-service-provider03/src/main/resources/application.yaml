@@ -1,0 +1,14 @@
+server:
+  port: 8312
+spring:
+  application:
+    name: eureka-service-provider
+#  cloud:
+#    discovery:
+#      enabled: true
+eureka:
+  instance:
+    instance-id: 11111
+  client:
+    service-url:
+      defaultZone: http://localhost:8311/eureka/

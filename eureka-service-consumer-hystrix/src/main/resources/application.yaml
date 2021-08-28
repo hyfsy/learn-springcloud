@@ -1,0 +1,50 @@
+server:
+  port: 8315
+spring:
+  application:
+    name: eureka-service-consumer-hystrix
+  cloud:
+    circuitbreaker:
+      hystrix:
+        enabled: true # 启用hystrix断路器
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8305/eureka/
+management:
+  endpoint:
+    hystrix:
+      stream:
+        enabled: true
+      config: # HystrixMetricsStreamServlet的 init-param
+        - a: b
+        - c: d
+  health:
+    hystrix:
+      enabled: true # 健康检查
+  metrics:
+    binders:
+      hystrix:
+        enabled: true # 指标绑定
+  endpoints:
+    web:
+      exposure:
+        include:
+          - health
+          - info
+          - hystrix.stream
+hystrix:
+  metrics:
+    enabled: true # 启用 hystrix的指标轮询
+    polling-interval-ms: 2000 # 指标轮询周期
+  shareSecurityContext: false # 启用 hystrix的安全上下文并发策略（自定义各个并发组件）
+  dashboard:
+    enable-ignore-connection-close-header: false # 如果响应流中存在 Connection:close 头，指示控制台忽略
+    init-parameters: # ProxyStreamServlet的 init-param
+      - a: b
+    proxy-stream-allow-list: # 允许的代理host，默认不允许，需要此处指定（高版本配置）
+      - a
+      - b
+feign:
+  hystrix:
+    enabled: false # feign重试机制使用 hystrix的包装
