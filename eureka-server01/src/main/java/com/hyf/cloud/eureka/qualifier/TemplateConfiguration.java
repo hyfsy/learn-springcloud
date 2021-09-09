@@ -27,7 +27,7 @@ public class TemplateConfiguration {
         return template;
     }
 
-    // 没有一起放入容器 ?
+    // 没有一起放入容器 ? :)
     @Bean
     public Template template3() {
         Template template = new Template();
