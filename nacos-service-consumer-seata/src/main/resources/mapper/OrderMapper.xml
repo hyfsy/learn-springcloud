@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hyf.cloud.nacos.mapper.OrderMapper">
+
+    <insert id="create" useGeneratedKeys="true">
+        insert into t_order (user_id, store_id, number)
+        values (#{userId}, #{storeId}, #{number});
+    </insert>
+    <delete id="delete">
+        delete
+        from t_order
+        where id = #{orderId}
+    </delete>
+    <select id="selectById" resultType="java.util.Map">
+        select *
+        from t_order
+        where id = #{orderId} for
+        update
+    </select>
+    <update id="update">
+        update t_order
+        set number = #{number}
+        where id = #{orderId}
+    </update>
+
+</mapper>

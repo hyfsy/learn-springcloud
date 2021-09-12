@@ -1,12 +1,10 @@
 package com.hyf.cloud.nacos.config;
 
 import io.seata.rm.datasource.DataSourceProxy;
-import io.seata.rm.datasource.xa.DataSourceProxyXA;
 import io.seata.spring.annotation.GlobalTransactionScanner;
 import io.seata.spring.boot.autoconfigure.properties.SeataProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
 import javax.annotation.Resource;
@@ -23,6 +21,7 @@ public class DataSourceConfigurationManual {
 
     @Resource
     private ApplicationContext applicationContext;
+
     @Resource
     private SeataProperties seataProperties;
 

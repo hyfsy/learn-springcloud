@@ -10,19 +10,19 @@
 
     <modules>
         <!-- netflix -->
-        <module>eureka-server01</module>
-        <module>eureka-server02</module>
-        <module>eureka-server03</module>
-        <module>eureka-service-provider01</module>
-        <module>eureka-service-provider02</module>
-        <module>eureka-service-provider03</module>
-        <module>eureka-service-consumer</module>
-        <module>eureka-service-consumer-ribbon</module>
-        <module>eureka-service-consumer-openfeign</module>
-        <module>eureka-service-consumer-hystrix</module>
-        <module>eureka-service-consumer-hystrix-turbine</module>
-        <module>eureka-service-gateway</module>
-        <module>eureka-service-cluster</module>
+        <!--<module>eureka-server01</module>-->
+        <!--<module>eureka-server02</module>-->
+        <!--<module>eureka-server03</module>-->
+        <!--<module>eureka-service-provider01</module>-->
+        <!--<module>eureka-service-provider02</module>-->
+        <!--<module>eureka-service-provider03</module>-->
+        <!--<module>eureka-service-consumer</module>-->
+        <!--<module>eureka-service-consumer-ribbon</module>-->
+        <!--<module>eureka-service-consumer-openfeign</module>-->
+        <!--<module>eureka-service-consumer-hystrix</module>-->
+        <!--<module>eureka-service-consumer-hystrix-turbine</module>-->
+        <!--<module>eureka-service-gateway</module>-->
+        <!--<module>eureka-service-cluster</module>-->
 
         <!-- alibaba -->
         <module>nacos-service-consumer</module>
