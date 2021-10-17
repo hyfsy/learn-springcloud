@@ -1,0 +1,29 @@
+server:
+  port: 8334
+spring:
+  application:
+    name: nacos-service-sentinel-gateway
+  cloud:
+    nacos:
+      discovery:
+        enabled: false
+        server-addr: 127.0.0.1:8848
+    sentinel:
+      transport:
+        port: 8722
+        dashboard: localhost:9080
+      filter:
+        enabled: false
+#      scg:
+    gateway:
+      enabled: true
+      discovery:
+        locator:
+          lower-case-service-id: true # 服务id统一小写匹配
+      routes:
+        - id: test_route
+          uri: http://localhost:${server.port}
+          predicates:
+            - Path=/test/**
+          filters:
+            - RewritePath=/(?<segment>.*), /gateway/$\{segment}

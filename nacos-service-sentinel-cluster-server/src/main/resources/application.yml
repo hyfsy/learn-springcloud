@@ -1,0 +1,14 @@
+server:
+  port: 8333
+spring:
+  application:
+    name: nacos-service-sentinel-cluster-server
+  cloud:
+    nacos:
+      discovery:
+        enabled: false
+        server-addr: 127.0.0.1:8848
+    sentinel:
+      transport:
+        port: 8721
+        dashboard: localhost:9080
