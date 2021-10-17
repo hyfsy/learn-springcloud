@@ -1,0 +1,25 @@
+server:
+  port: 8335
+spring:
+  application:
+    name: nacos-service-sentinel-datasource
+  cloud:
+    nacos:
+      discovery:
+        enabled: true
+        server-addr: 127.0.0.1:8848
+    sentinel:
+      transport:
+        port: 8722
+        dashboard: localhost:9080
+      datasource:
+        ds1:
+          nacos:
+            server-addr: ${spring.cloud.nacos.discovery.server-addr}
+            data-id: flow-rule.json
+            group-id: SENTINEL_GROUP
+            namespace: sentinel
+            data-type: json
+            rule-type: flow
+            # 特殊转换才指定，默认支持json和xml两种格式的转换
+            converter-class: com.alibaba.cloud.sentinel.datasource.converter.JsonConverter

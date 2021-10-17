@@ -38,11 +38,12 @@ spring:
       datasource:
         ds1:
           nacos:
-            server-addr: localhost:8848
-            data-id: sentinel
+            server-addr: ${spring.cloud.nacos.discovery.server-addr}
+            data-id: flow-rule.json
             group-id: SENTINEL_GROUP
+            namespace: sentinel
             data-type: json
-            rule-type: degrade
+            rule-type: flow
 management:
   endpoints:
     web:

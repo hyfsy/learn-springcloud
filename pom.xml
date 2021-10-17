@@ -41,6 +41,7 @@
         <module>nacos-service-sentinel-cluster-client</module>
         <module>nacos-service-sentinel-cluster-server</module>
         <module>nacos-service-sentinel-gateway</module>
+        <module>nacos-service-sentinel-datasource</module>
 
         <!-- test -->
         <module>test-devtools</module>
