@@ -1,4 +1,4 @@
-package com.hyf.cloud.eureka.config;
+package com.hyf.cloud.nacos.config;
 
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;

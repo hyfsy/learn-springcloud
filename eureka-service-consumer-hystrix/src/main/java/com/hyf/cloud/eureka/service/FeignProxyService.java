@@ -1,4 +1,4 @@
-package com.hyf.cloud.eureka.service;
+package com.hyf.cloud.nacos.service;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,4 +1,4 @@
-package com.hyf.cloud.eureka.test;
+package com.hyf.cloud.nacos.test;
 
 import com.netflix.hystrix.HystrixCommand;
 import com.netflix.hystrix.HystrixCommandGroupKey;

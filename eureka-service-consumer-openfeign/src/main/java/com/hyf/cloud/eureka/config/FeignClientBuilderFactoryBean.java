@@ -1,4 +1,4 @@
-package com.hyf.cloud.eureka.config;
+package com.hyf.cloud.nacos.config;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.FactoryBean;

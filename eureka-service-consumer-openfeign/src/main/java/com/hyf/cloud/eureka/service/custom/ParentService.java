@@ -1,4 +1,4 @@
-package com.hyf.cloud.eureka.service.custom;
+package com.hyf.cloud.nacos.service.custom;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 

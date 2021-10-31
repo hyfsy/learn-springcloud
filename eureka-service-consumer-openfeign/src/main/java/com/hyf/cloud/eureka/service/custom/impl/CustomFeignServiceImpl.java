@@ -1,6 +1,6 @@
-package com.hyf.cloud.eureka.service.custom.impl;
+package com.hyf.cloud.nacos.service.custom.impl;
 
-import com.hyf.cloud.eureka.service.custom.CustomFeignService;
+import com.hyf.cloud.nacos.service.custom.CustomFeignService;
 import feign.Request;
 import org.springframework.data.domain.Pageable;
 

@@ -1,6 +1,6 @@
-package com.hyf.cloud.eureka.controller;
+package com.hyf.cloud.nacos.controller;
 
-import com.hyf.cloud.eureka.service.FeignProxyService;
+import com.hyf.cloud.nacos.service.FeignProxyService;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

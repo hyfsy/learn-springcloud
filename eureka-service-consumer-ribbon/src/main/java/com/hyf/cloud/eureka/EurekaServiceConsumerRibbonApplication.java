@@ -1,4 +1,4 @@
-package com.hyf.cloud.eureka;
+package com.hyf.cloud.nacos;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

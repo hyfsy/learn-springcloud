@@ -1,7 +1,7 @@
-package com.hyf.cloud.eureka.controller;
+package com.hyf.cloud.nacos.controller;
 
-import com.hyf.cloud.eureka.service.custom.CustomFeignService;
-import com.hyf.cloud.eureka.service.FeignProxyService;
+import com.hyf.cloud.nacos.service.custom.CustomFeignService;
+import com.hyf.cloud.nacos.service.FeignProxyService;
 import feign.Request;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;

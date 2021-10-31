@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.hyf.cloud.sentinel.mapper.MoneyMapper">
+<mapper namespace="com.hyf.cloud.seata.mapper.MoneyMapper">
 
     <update id="deduct">
         update t_money set money = money - #{money} where user_id = #{userId}

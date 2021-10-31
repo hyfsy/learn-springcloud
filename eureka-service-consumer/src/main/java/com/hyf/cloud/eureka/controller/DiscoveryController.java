@@ -1,4 +1,4 @@
-package com.hyf.cloud.eureka.controller;
+package com.hyf.cloud.nacos.controller;
 
 import com.netflix.appinfo.HealthCheckHandler;
 import com.netflix.appinfo.InstanceInfo;

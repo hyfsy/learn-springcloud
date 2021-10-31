@@ -1,4 +1,4 @@
-package com.hyf.cloud.eureka.controller;
+package com.hyf.cloud.nacos.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

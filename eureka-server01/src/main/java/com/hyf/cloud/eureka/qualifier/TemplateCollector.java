@@ -1,4 +1,4 @@
-package com.hyf.cloud.eureka.qualifier;
+package com.hyf.cloud.nacos.qualifier;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;

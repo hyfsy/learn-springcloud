@@ -1,4 +1,4 @@
-package com.hyf.cloud.eureka.controller;
+package com.hyf.cloud.nacos.controller;
 
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.RequestMapping;

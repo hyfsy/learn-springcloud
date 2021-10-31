@@ -1,4 +1,4 @@
-package com.hyf.cloud.eureka.service.custom;
+package com.hyf.cloud.nacos.service.custom;
 
 import feign.Request;
 import org.springframework.cloud.openfeign.FeignClient;

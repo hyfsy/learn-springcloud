@@ -1,4 +1,4 @@
-package com.hyf.cloud.eureka.config;
+package com.hyf.cloud.nacos.config;
 
 import com.netflix.discovery.converters.Auto;
 import org.springframework.beans.factory.annotation.Autowired;

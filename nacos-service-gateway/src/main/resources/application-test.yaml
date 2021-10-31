@@ -1,0 +1,147 @@
+server:
+  port: 8336
+spring:
+  application:
+    name: nacos-service-gateway
+  cloud:
+    discovery:
+      reactive:
+        enabled: true
+    gateway:
+      routes:
+        - id: consumer01 # 路由ID，要求唯一，建议配合服务名
+          uri: http://localhost:8304 # 提供服务的路由地址
+#          uri: lb:http://nacos-service-provider # 服务负载均衡支持
+          predicates: # 支持多种断言
+            - name: Cookie # 展开配置
+              args:
+                name: mycookie
+                regexp: mycookievalue
+            - Path=/gateway/**,/uriteimplate/{segment}
+            - Cookie=mycookie,mycookievalue
+            - After=2021-06-05T12:58:21.789+08:00[Asia/Shanghai] # ZonedDateTime.now()
+            - Before=2021-06-05T12:59:36.433+08:00[Asia/Shanghai]
+            - Between=2021-06-05T12:58:21.789+08:00[Asia/Shanghai], 2021-06-05T12:59:36.433+08:00[Asia/Shanghai]
+            - Header=X-Request-Id, \d+
+            - Host=**.somehost.org,**.anotherhost.org # 还支持URI模板变量，例如：{sub}.myhost.org
+            - Method=GET,POST
+            - Query=red, gree. # 查询条件匹配，正则表达式可选
+            - RemoteAddr=192.168.1.1/24 # 匹配指定子网掩码的IP，例如192.168.1.10
+            - Weight=group1, 2 # 对应组的权重，如果还有个route指定了group1为8，则流量的20%走此路由
+          filters:
+            - AddRequestHeader=X-Request-red, blue-{segment} # 前提是predicate中添加了segment
+            - AddRequestParameter=red, blue
+            - AddResponseHeader=X-Response-Red, Blue
+            - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin # 移除重复头，还接受一个可选的strategy参数
+            - CircuitBreaker=myCircuitBreaker # 请求熔断支持
+            - name: CircuitBreaker
+              args:
+                name: myCircuitBreaker
+                fallbackUri: forward:/inCaseOfFailureUseThis # 仅支持 forward:
+                statusCodes: # 状态码触发熔断
+                  - 500
+                  - "NOT_FOUND"
+            - name: FallbackHeaders
+              args:
+                executionExceptionTypeHeaderName: Test-Header # 熔断回调到此路径时添加请求头
+            - MapRequestHeader=Blue, X-Request-Red # 向下游添加X-Request-Red头，使用当前请求头Blue的值
+            - PrefixPath=/mypath # 请求uri添加前缀
+            - PreserveHostHeader # 确定是否应发送原始主机标头，而不是由 HTTP 客户端确定的主机标头
+            - name: RequestRateLimiter # 限流过滤
+              args:
+                rate-limiter: "#{@myRedisRateLimiter}"
+                key-resolver: "#{@myKeyResolver}"
+                # 30qps，可面对一些突发情况（60）
+                redis-rate-limiter.replenishRate: 30 # 填充令牌桶的速率（秒）
+                redis-rate-limiter.burstCapacity: 60 # 令牌桶的容量（每秒最大请求速率）
+                redis-rate-limiter.requestedTokens: 1 # 每个请求从桶中获取的令牌数量
+            - RedirectTo=302, https://acme.org
+            - RemoveRequestHeader=X-Request-Foo
+            - RemoveResponseHeader=X-Response-Foo
+            - RemoveRequestParameter=red
+            - RewritePath=/red/?(?<segment>.*), /$\{segment} # /red/blue -> /blue. YAML规范，$应替换为$\
+            # stripVersionMode，locationHeaderName，hostValue，protocolsRegex四个参数
+            # stripVersionMode: 响应头的Location中存在版本的去除策略
+            #   - NEVER_STRIP: 版本不会被剥离，即使原始请求路径不包含版本
+            #   - AS_IN_REQUEST 仅当原始请求路径不包含版本时才会剥离版本
+            #   - ALWAYS_STRIP 版本总是被剥离，即使原始请求路径包含版本
+            # locationHeaderName: 替换响应头的Location名称
+            # hostValue: 替换Location值，否则使用请求头的Host
+            # protocolsRegex: 请求协议，默认值为http|https|ftp|ftps
+            - RewriteLocationResponseHeader=AS_IN_REQUEST, Location, ,
+            # name，regexp，replacement
+            - RewriteResponseHeader=X-Response-Red, , password=[^&]+, password=*** # TODO 中间多个，
+            - SaveSession # 强制执行 WebSession::save 操作，一般与其他数据存储功能使用，如 Spring Security与 Spring Session
+            - SetPath=/{segment} # 将请求转为 /xxx，需要predicate中有模板，例如: Path=/red/{segment}
+            - SetRequestHeader=X-Request-Red, Blue # 替换下游响应头，下游没有头，则忽略，返回下游服务才执行
+            - SetResponseHeader=X-Response-Red, Blue # 和上面一样的功能，但返回网关才执行
+            - SetStatus=401 # 修改状态码为401
+            - StripPrefix=2 # 剥离的请求路径片段数，例如：/a/b/c -> /c
+            - name: Retry # 请求重试机制
+              args:
+                retries: 3
+                methods: GET, POST # HttpMethod
+                statuses: BAD_GATEWAY # HttpStatus
+                series: SERVER_ERROR # HttpStatus.Series
+                exceptions: java.io.IOException, org.springframework.cloud.gateway.support.TimeoutException
+                backoff: # 重试的指数退避配置。在回退间隔（ firstBackoff * (factor ^ n) ）之后执行重试
+                  maxBackoff: 50ms # 如果此项配置，则直接使用
+                  basedOnPreviousValue: false # 如果为true，则采用动态计算的
+                  firstBackoff: 10ms
+                  factor: 2
+            - name: RequestSize # 限制请求大小，DataSize类型，默认5MB，配置单位默认B
+              args:
+                maxSize: 5000000
+            - name: SetRequestHostHeader
+              args:
+                host: example.org
+          metadata: # 自定义元数据
+            my-key: my-value
+            response-timeout: 200
+            connect-timeout: 200 # 毫秒
+      filter:
+        request-rate-limiter: # KeyResolver返回限流key
+          deny-empty-key: true
+          empty-key-status-code: 403
+        secure-headers:  # SecureHeaders 默认添加的安全响应头
+          content-security-policy: self # 更改默认的响应头值
+          disable: content-security-policy # 禁用添加响应头，多个逗号分隔
+      default-filters: # 全局默认过滤器
+        - RemoveRequestHeader=X-Request-Foo
+        - RemoveResponseHeader=X-Response-Foo
+      redis-rate-limiter: # redis限流配置，配置key名称相关，限流实际配置 see RequestRateLimiter
+        include-headers: true
+      set-status:
+        original-status-header-name: ORIGIN_STATUS_NAME # 指定原始的请求状态码，see filter SetStatus
+      loadbalancer: # 找不到服务，默认返回503
+        use404: true
+      metrics: # 网关指标，默认开启
+        enabled: true
+      x-forwarded:
+        enabled: true # 启用 X-Forwarded请求头添加
+        for-enabled: true # 启用添加该请求头
+        for-append: true # 启用追加该请求头
+        host-enabled: true
+        host-append: true
+        port-append: true
+        port-enabled: true
+        proto-append: true
+        proto-enabled: true
+        prefix-enabled: true
+        prefix-append: true
+        order: 0 # 过滤器排序号
+      httpclient:
+        ssl:
+          use-insecure-trust-manager: true # 信任所有下游HTTPS证书
+        connect-timeout: 45000
+        response-timeout: 5s # 必须为 Duration
+      globalcors: # 全局cors配置
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "https://docs.spring.io"
+            allowedMethods:
+              - GET
+        add-to-simple-url-handler-mapping: true # 要网关未处理的请求提供相同的 CORS 配置
+      discovery:
+        locator:
+          enabled: true

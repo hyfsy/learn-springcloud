@@ -1,7 +1,7 @@
-package com.hyf.cloud.eureka.config;
+package com.hyf.cloud.nacos.config;
 
-import com.hyf.cloud.eureka.service.custom.CustomFeignService;
-import com.hyf.cloud.eureka.service.custom.impl.CustomFeignServiceImpl;
+import com.hyf.cloud.nacos.service.custom.CustomFeignService;
+import com.hyf.cloud.nacos.service.custom.impl.CustomFeignServiceImpl;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.cloud.openfeign.FeignClientBuilder;
 import org.springframework.context.ApplicationContext;
