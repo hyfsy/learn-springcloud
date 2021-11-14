@@ -46,6 +46,7 @@
 
         <!-- test -->
         <module>test-devtools</module>
+        <module>test-springcloud</module>
         <module>learn-springcloud-dependencies</module>
     </modules>
 

@@ -1,0 +1,5 @@
+#server:
+#  port: 8336
+spring:
+  application:
+    name: test-springcloud
