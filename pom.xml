@@ -9,45 +9,9 @@
     <packaging>pom</packaging>
 
     <modules>
-        <!-- netflix -->
-        <!--<module>eureka-server01</module>-->
-        <!--<module>eureka-server02</module>-->
-        <!--<module>eureka-server03</module>-->
-        <!--<module>eureka-service-provider01</module>-->
-        <!--<module>eureka-service-provider02</module>-->
-        <!--<module>eureka-service-provider03</module>-->
-        <!--<module>eureka-service-consumer</module>-->
-        <!--<module>eureka-service-consumer-ribbon</module>-->
-        <!--<module>eureka-service-consumer-openfeign</module>-->
-        <!--<module>eureka-service-consumer-hystrix</module>-->
-        <!--<module>eureka-service-consumer-hystrix-turbine</module>-->
-        <!--<module>eureka-service-gateway</module>-->
-        <!--<module>eureka-service-cluster</module>-->
-
-        <!-- alibaba -->
-        <module>nacos-service-consumer</module>
-        <module>nacos-service-provider01</module>
-        <module>nacos-service-provider02</module>
-        <module>nacos-service-config</module>
-        <module>nacos-service-basic</module>
-        <module>nacos-service-spring</module>
-        <module>nacos-service-spring-boot</module>
-        <module>nacos-service-consumer-seata</module>
-        <module>nacos-service-provider-seata-store</module>
-        <module>nacos-service-provider-seata-order</module>
-        <module>nacos-service-provider-seata-money</module>
-        <module>nacos-service-sentinel-basic</module>
-        <module>nacos-service-consumer-sentinel</module>
-        <module>nacos-service-sentinel-cluster-client</module>
-        <module>nacos-service-sentinel-cluster-server</module>
-        <module>nacos-service-sentinel-gateway</module>
-        <module>nacos-service-sentinel-datasource</module>
-        <module>nacos-service-gateway</module>
-
-        <!-- test -->
-        <module>test-devtools</module>
-        <module>test-springcloud</module>
-        <module>learn-springcloud-dependencies</module>
+        <module>netflix</module>
+        <module>alibaba</module>
+        <module>test</module>
     </modules>
 
     <properties>
@@ -58,10 +22,13 @@
         <maven.compiler.target>1.8</maven.compiler.target>
 
         <!-- TODO Spring注解扫描穿透整个项目工程？ -->
+
+        <!-- alibaba version -->
         <spring.cloud-version>2020.0.3</spring.cloud-version>
         <spring.boot-version>2.5.1</spring.boot-version>
         <spring.cloud-alibaba-version>2021.1</spring.cloud-alibaba-version>
 
+        <!-- netflix version -->
         <!--<spring.cloud-version>Hoxton.SR4</spring.cloud-version>-->
         <!--<spring.boot-version>2.2.5.RELEASE</spring.boot-version>-->
         <!--<spring.cloud-alibaba-version>2.2.3.RELEASE</spring.cloud-alibaba-version>-->

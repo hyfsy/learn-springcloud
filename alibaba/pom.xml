@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.hyf</groupId>
+        <artifactId>learn-springcloud</artifactId>
+        <version>${revision}</version>
+    </parent>
+    <artifactId>alibaba-parent</artifactId>
+    <packaging>pom</packaging>
+
+    <modules>
+        <!-- alibaba -->
+        <module>nacos-service-consumer</module>
+        <module>nacos-service-provider01</module>
+        <module>nacos-service-provider02</module>
+        <module>nacos-service-config</module>
+        <module>nacos-service-basic</module>
+        <module>nacos-service-spring</module>
+        <module>nacos-service-spring-boot</module>
+        <module>nacos-service-consumer-seata</module>
+        <module>nacos-service-provider-seata-store</module>
+        <module>nacos-service-provider-seata-order</module>
+        <module>nacos-service-provider-seata-money</module>
+        <module>nacos-service-sentinel-basic</module>
+        <module>nacos-service-consumer-sentinel</module>
+        <module>nacos-service-sentinel-cluster-client</module>
+        <module>nacos-service-sentinel-cluster-server</module>
+        <module>nacos-service-sentinel-gateway</module>
+        <module>nacos-service-sentinel-datasource</module>
+        <module>nacos-service-gateway</module>
+    </modules>
+
+</project>

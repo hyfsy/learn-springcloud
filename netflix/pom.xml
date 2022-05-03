@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.hyf</groupId>
+        <artifactId>learn-springcloud</artifactId>
+        <version>${revision}</version>
+    </parent>
+    <artifactId>netflix-parent</artifactId>
+    <packaging>pom</packaging>
+
+    <!-- 高版本netflix-starter仅还在维护eureka -->
+    <properties>
+        <!-- netflix version -->
+        <spring.cloud-version>Hoxton.SR4</spring.cloud-version>
+        <spring.boot-version>2.2.5.RELEASE</spring.boot-version>
+        <spring.cloud-alibaba-version>2.2.3.RELEASE</spring.cloud-alibaba-version>
+    </properties>
+
+    <modules>
+        <!-- netflix -->
+        <module>eureka-server01</module>
+        <module>eureka-server02</module>
+        <module>eureka-server03</module>
+        <module>eureka-service-provider01</module>
+        <module>eureka-service-provider02</module>
+        <module>eureka-service-provider03</module>
+        <module>eureka-service-consumer</module>
+        <module>eureka-service-consumer-ribbon</module>
+        <module>eureka-service-consumer-openfeign</module>
+        <module>eureka-service-consumer-hystrix</module>
+        <module>eureka-service-consumer-hystrix-turbine</module>
+        <module>eureka-service-gateway</module>
+        <module>eureka-service-cluster</module>
+    </modules>
+
+</project>
