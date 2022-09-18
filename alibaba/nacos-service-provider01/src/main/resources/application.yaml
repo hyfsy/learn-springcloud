@@ -8,4 +8,7 @@ spring:
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848
+        weight: 8 # 0会在客户端排除，具体值暂时无用
+        metadata:
+          gray_tags: gray1
 
